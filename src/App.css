@@ -58,4 +58,38 @@
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
+  height: 100%;
+}
+.listing-item{
+width:80%;
+padding:15px;
+border-radius:10px;
+border:1px solid black;
+text-align:left;
+margin-bottom: 40px;
+
+}
+
+.listing-details{
+  padding:10px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+
+.listing-image {
+  width: 50%;
+}
+
+.small-details {
+
+}
+
+.super-host-conditional {
+  background-color: lightcoral; 
+  border-radius: 10px;
+  height: 30px;
+  text-align: left;
+  line-height: 30px;
 }
