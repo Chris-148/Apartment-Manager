@@ -1,28 +1,28 @@
 import './App.css'
-import listingData from './assets/listingData.json'
 import Footer from './components/Footer'
-import ListingItem from './components/ListingItem';
 import Navbar from './components/Navbar'
-import React,{useState} from "react";
+import AboutPage from './pages/AboutPage';
+import Homepage from './pages/Homepage';
+import { Routes, Route } from 'react-router-dom';
+import ListingDetailsPage from './pages/ListingDetailsPage';
+import NotFoundPage from './pages/NotFoundPage';
+import listingData from './assets/listingData.json';
+import NewListingPage from './pages/NewListingPage';
+
 
 
 function App() {
 
-  const [listingDataState, setListingDataState] = useState(listingData);
-  
-  const handleDelete=(id)=>{
-    setListingDataState(listingDataState.filter((item)=>item.id!==id));
-  };
-
   return (
     <div className = "App">
     <Navbar/>
-    
-    {listingDataState.map((oneItem)=>{
-         return <ListingItem oneItem = {oneItem} key = {oneItem.id} handleDelete = {handleDelete}/>  
-    })  
-    }
-    
+    <Routes>
+    <Route path = '/' element = {<Homepage/>}/>
+    <Route path = '/About' element = {<AboutPage/>}/> 
+    <Route path = '/Details/:listingId' element = {<ListingDetailsPage listingData = {listingData}/>}/>
+    <Route path = '/NewListing' element = {<NewListingPage/>}/>
+    <Route path = '*' element={<NotFoundPage/>}/>
+    </Routes>
     <Footer/>
     </div>
   );

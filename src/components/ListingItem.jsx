@@ -1,6 +1,8 @@
+import { Link } from "react-router-dom";
 
 
 const ListingItem = ({oneItem, handleDelete}) => {
+  
 
   return (
     <div className = "listing-item">
@@ -14,11 +16,14 @@ const ListingItem = ({oneItem, handleDelete}) => {
             <p>Review Score:{oneItem.review_scores_ratings}</p>
         </div>
         </div>
-
         <h3>{oneItem.name}</h3>
         <p>{oneItem.description}</p>
-          
-          <button className="delete-button" onClick={()=>handleDelete(oneItem.id)}>Delete</button>
+        <div className = 'listing-item-btns'>
+          <button className="item-button" onClick={()=>handleDelete(oneItem.id)}>Delete</button>
+          <Link to={`/Details/${oneItem.id}`}>
+          <button className="item-button">Show Details</button>
+          </Link>
+        </div>
     </div>
   );
 }
