@@ -1,11 +1,9 @@
 import CreateNewListing from "../components/CreateNewListing"
-import listingData from '../assets/listingData.json';
 
-
-const NewListingPage = () => {
+const NewListingPage = ({listingDataState, setListingDataState}) => {
   return (
-    <CreateNewListing listingData = {listingData}/>
+    <CreateNewListing listingDataState = {listingDataState} setListingDataState = {setListingDataState}/>
   )
-}
+ }
 
 export default NewListingPage

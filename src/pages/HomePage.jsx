@@ -4,9 +4,8 @@ import React,{useState} from "react";
 import { Link } from "react-router-dom"
 
 
-const Homepage = () => {
-    const [listingDataState, setListingDataState] = useState(listingData);
-  
+const Homepage = ({listingDataState, setListingDataState}) => {
+
     const handleDelete=(id)=>{
       setListingDataState(listingDataState.filter((item)=>item.id!==id));
     };

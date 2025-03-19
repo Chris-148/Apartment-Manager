@@ -1,11 +1,9 @@
-import { useState } from "react"
-import { v4 as uuidv4 } from "uuid";
-import { useNavigate } from "react-router-dom";
-// import cities from "../assets/cities.json"
+import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom"
+import { useEffect } from "react";
 
-
-const CreateNewListing = ({listingDataState, setListingDataState}) => {
-
+export const UpdateListingPage = ({listingDataState, setListingDataState}) => {
+    const [id, setId] = useState("");
     const [name, setName] = useState("");
     const [picture_url, setPicture_url] = useState("");
     const [neighbourhood, setNeighbourhood] = useState(""); // checkbox
@@ -15,12 +13,36 @@ const CreateNewListing = ({listingDataState, setListingDataState}) => {
     const [description, setDescription] = useState("");
     const nav = useNavigate();
     
+    // listing Id to be updated
+    const { listingId } = useParams();
 
-    function handleCreateListing(event) {
+    // console.log(listingDataState)
+
+    useEffect(() => {
+      const theFoundListing = listingDataState.find((oneListing)=>{
+         if (oneListing.id === Number(listingId)) {
+          return true;
+        };
+        
+    })
+    
+    setId(theFoundListing.id),
+    setName(theFoundListing.name),
+    setPicture_url(theFoundListing.picture_url),
+    setNeighbourhood(theFoundListing.neighbourhood),
+    setPrice(theFoundListing.price),
+    setMinimum_nights(theFoundListing.minimum_nights),
+    setReview_scores_ratings(theFoundListing.review_scores_ratings),
+    setDescription(theFoundListing.description)
+      },[])
+
+    function handleUpdateListing(event) {
       event.preventDefault()
-
-      const newListingToAdd = {
-        id: uuidv4(),
+    
+      
+      const updatedListing = {
+        //Problem: The original object has way more properties and we are not dragging along existing (not updated) properties
+        id,
         name,
         picture_url,
         neighbourhood,
@@ -30,8 +52,16 @@ const CreateNewListing = ({listingDataState, setListingDataState}) => {
         description
       };
 
-      console.log(newListingToAdd)
-      setListingDataState([newListingToAdd, ...listingDataState])
+      // console.log(updatedListing)
+      const updatedArrayofListing = listingDataState.map((oneListing) => {
+        if (oneListing.id === Number(listingId)) {
+          return updatedListing;
+        } else {
+          return oneListing;
+        }
+      });
+      console.log(updatedArrayofListing)
+      setListingDataState(updatedArrayofListing)
       
 
       setName("");
@@ -50,7 +80,7 @@ const CreateNewListing = ({listingDataState, setListingDataState}) => {
 
 
   return (
-    <form onSubmit = {handleCreateListing}>
+    <form onSubmit = {handleUpdateListing}>
         <label>
         Name:
         <input
@@ -87,7 +117,7 @@ const CreateNewListing = ({listingDataState, setListingDataState}) => {
       <label>
       Price:
         <input
-        type="number"
+        type="text"
         placeholder="price"
         value={price}
         onChange={(event)=>setPrice(event.target.value)}
@@ -126,21 +156,7 @@ const CreateNewListing = ({listingDataState, setListingDataState}) => {
         onChange={(event)=>setDescription(event.target.value)}
         />
        </label>
-       <button type="submit">Submit</button>
+       <button type="submit">Update</button>
     </form>
   )
 }
-
-export default CreateNewListing
-
-
-      {/* <select onChange={(event)=>{setNeighbourhood(event.target.value)}}>
-        City:
-      {cities.map((city, index)=>
-        <option key = {index} value={city.name}>{city.name}
-        </option>
-      )}
-      </select> */} 
-        
- 
-          

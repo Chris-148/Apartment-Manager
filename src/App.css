@@ -89,8 +89,11 @@ margin-bottom: 40px;
   width: 50%;
 }
 
-.small-details {
-
+.small-details p {
+border: grey solid 1px;
+border-radius: 5px;
+padding: 5px;
+width: 200px;
 }
 
 .super-host-conditional {
@@ -116,3 +119,10 @@ margin-bottom: 40px;
   align-items: center;
 }
 
+.item-button {
+  margin: 20px;
+  border: white;
+  border-radius: 5px;
+  background-color: pink;
+  padding: 10px;
+}

@@ -19,9 +19,12 @@ const ListingItem = ({oneItem, handleDelete}) => {
         <h3>{oneItem.name}</h3>
         <p>{oneItem.description}</p>
         <div className = 'listing-item-btns'>
-          <button className="item-button" onClick={()=>handleDelete(oneItem.id)}>Delete</button>
+          <button className="item-button" onClick={()=>handleDelete(oneItem.id)}>Delete Listing</button>
           <Link to={`/Details/${oneItem.id}`}>
           <button className="item-button">Show Details</button>
+          </Link>
+          <Link to={`/UpdateListingPage/${oneItem.id}`}>
+          <button className="item-button">Update Listing</button>
           </Link>
         </div>
     </div>
